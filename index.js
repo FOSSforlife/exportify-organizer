@@ -31,6 +31,9 @@ function getPlaylistUpdatedDate(tracks) {
       const csvString = await z.async('string');
       return Promise.resolve([csvString, z.name]).then(([csvString, filename]) => {
           const tracks = parse(csvString.toString(), {columns: true});
+          if(!tracks.length) {
+            return;
+          }
           const pathArr = ['output', getPlaylistCategory(tracks)];
           if(SORT_ALL) { // add the year
             pathArr.push(getPlaylistUpdatedDate(tracks).getFullYear().toString());
