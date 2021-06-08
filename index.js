@@ -32,7 +32,7 @@ function getPlaylistUpdatedDate(tracks) {
       return Promise.resolve([csvString, z.name]).then(([csvString, filename]) => {
           const tracks = parse(csvString.toString(), {columns: true});
           const pathArr = ['output', getPlaylistCategory(tracks)];
-          if(SORT_ALL) {
+          if(SORT_ALL) { // add the year
             pathArr.push(getPlaylistUpdatedDate(tracks).getFullYear().toString());
           }
           fs.mkdirpSync(path.join(...pathArr))
