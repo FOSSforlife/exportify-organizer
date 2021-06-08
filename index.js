@@ -36,8 +36,8 @@ function getPlaylistUpdatedDate(tracks) {
             pathArr.push(getPlaylistUpdatedDate(tracks).getFullYear().toString());
           }
           fs.mkdirpSync(path.join(...pathArr))
-          console.log(pathArr);
           fs.writeFileSync(path.join(...pathArr, filename), csvString);
       });
   }));
+  fs.writeFileSync(path.join('output', 'README.md'), 'Created with [exportify](https://github.com/watsonbox/exportify) and [expotify-organizer](https://github.com/FOSSforlife/exportify-organizer)');
 })();
