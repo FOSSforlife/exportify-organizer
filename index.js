@@ -30,7 +30,7 @@ function getPlaylistUpdatedDate(tracks) {
     Object.values(zipData.files).map(async z => {
       const csvString = await z.async('string');
       return Promise.resolve([csvString, z.name]).then(([csvString, filename]) => {
-          const tracks = parse(csvString.toString(), {columns: true});
+          const tracks = parse(csvString.toString(), {columns: true, relaxColumnCount: true, relax: true});
           if(!tracks.length) {
             return;
           }
@@ -42,5 +42,5 @@ function getPlaylistUpdatedDate(tracks) {
           fs.writeFileSync(path.join(...pathArr, filename), csvString);
       });
   }));
-  fs.writeFileSync(path.join('output', 'README.md'), 'Created with [exportify](https://github.com/watsonbox/exportify) and [expotify-organizer](https://github.com/FOSSforlife/exportify-organizer)');
+  fs.writeFileSync(path.join('output', 'README.md'), `Created with [exportify](https://github.com/watsonbox/exportify) and [expotify-organizer](https://github.com/FOSSforlife/exportify-organizer)\n\nLast updated ${(new Date()).toString()}`);
 })();
